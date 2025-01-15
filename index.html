@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+    <script src="./assets/aframe.js"></script>
+    <script src="./assets/mindar.js"></script>
+    <script src="./assets/glaz.js"></script>
+    <script src="./assets/vtk.js"></script>
+    <script src="./assets/fly.js"></script>
+    <script src="./assets/izhevsk1.js"></script>
+    <script src="./assets/izhevsk2.js"></script>
+    <script src="./assets/kamb.js"></script>
+    <script src="./assets/sarapul.js"></script>
+    <script>
+      const isSafari = () => {
+        const ua = window.navigator.userAgent;
+        const iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
+        const webkit = !!ua.match(/WebKit/i);
+        return iOS && webkit && !ua.match(/CriOS/i);
+      }
+
+      const playVideoSafari = (id) => {
+        const av = document.querySelector(id);
+        av.muted = false;
+        av.defaultMuted = false;
+        av.play();
+      }
+
+      const show = (id) => {
+        const av = document.querySelector(id);
+
+        if (isSafari()) {
+            var button = document.querySelector("#amazing-button");
+            button.style.visibility = 'visible';
+            button.onclick = function(){playVideoSafari(id)};
+        }
+        if (!isSafari()) {
+          av.muted = false;
+          av.defaultMuted = false;
+          av.play();
+        }
+      }
+
+      const hide = (id) => {
+        var button = document.querySelector("#amazing-button");
+        button.style.visibility = 'hidden';
+        const av = document.querySelector(id);
+        av.defaultMuted = true;
+        av.muted = true;
+        av.pause();
+      }
+
+      const init = (el, id) => {
+        el.addEventListener('targetFound', event => {
+          el.object3D.visible = true;
+          show(id);
+        });
+        el.addEventListener('targetLost', event => hide(id));
+      }
+
+      AFRAME.registerComponent('chak', {
+        init: function () { init(this.el, '#chack'); },
+      });
+      AFRAME.registerComponent('soul', {
+        init: function () { init(this.el, '#soul'); },
+      });
+      AFRAME.registerComponent('weudm', {
+        init: function () { init(this.el, '#weudm'); },
+      });
+      AFRAME.registerComponent('sarv', {
+        init: function () { init(this.el, '#sarv'); },
+      });
+    </script>
+  </head>
+  <body>
+    <div id="amazing-button" style="top: 10%; left:45%; position:absolute; z-index:1000; visibility: hidden;">
+      <button>PLAY</button>
+    </div>
+    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      <a-assets>
+        <video id="sarv" src="./assets/sarapul.m4v" loop playsinline muted crossorigin="anonymous"></video>
+        <video id="weudm" src="./assets/wefromudm.mp4" loop playsinline muted crossorigin="anonymous"></video>
+        <video id="soul" src="./assets/aik.mp4" loop playsinline muted crossorigin="anonymous"></video>
+        <video id="chack" src="./assets/chak6.mp4" loop playsinline muted controls crossorigin="anonymous"></video>
+      </a-assets>
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <a-entity mindar-image-target="targetIndex: 10">
+        <a-plane material="opacity:1;src: assets/vtk/1.jpg" vtk="" position="0 0 0" height="1.5" width="1.5">
+        </a-plane>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 3">
+        <a-plane material="opacity:1;src: assets/glaz/1.jpg" glaz="" position="0 0 0" height="2.8" width="2.8">
+        </a-plane>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 4">
+        <a-plane material="opacity:1;src: assets/izh1/1.jpg" izh1="" position="0 0 0" height="2.8" width="2.8">
+        </a-plane>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 5">
+        <a-plane material="opacity:1;src: assets/izh2/1.png" izh2="" position="0 0 0" height="2.8" width="2.8">
+        </a-plane>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 7">
+        <a-plane material="opacity:1;src: assets/kamb/1.jpg" kamb="" position="0 0 0" height="2.8" width="2.8">
+        </a-plane>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 8">
+        <a-plane material="opacity:1;src: assets/sar/1.jpg" sarapul="" position="0 0 0" height="2.8" width="2.8">
+        </a-plane>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 2">
+        <a-plane material="opacity:1;src: assets/fly/1.jpg" fly="" position="0 0 0" height="1.5" width="1.5">
+        </a-plane>
+      </a-entity>
+      <a-entity sarv mindar-image-target="targetIndex: 9" position="0 0 -1.5">
+        <a-video src="#sarv" width="25" height="15" position="0 0 0" scale="0.07 0.07 0.07"></a-video>
+      </a-entity>
+      <a-entity weudm mindar-image-target="targetIndex: 6" position="0 0 -1.5">
+        <a-video src="#weudm" width="16" height="12" position="0 0 0" scale="0.07 0.07 0.07"></a-video>
+      </a-entity> 
+      <a-entity soul mindar-image-target="targetIndex: 0" position="0 0 -1.5">
+        <a-video src="#soul" width="32" height="20" position="0 0 0" scale="0.07 0.07 0.07"></a-video>
+      </a-entity>
+      <a-entity chak mindar-image-target="targetIndex: 1" position="0 0 -1.5">
+        <a-video src="#chack" width="16" height="20" position="0 0 0" scale="0.07 0.07 0.07"></a-video>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
