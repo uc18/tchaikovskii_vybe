@@ -9,4 +9,4 @@
 
 Для того, чтобы сработали опорные картинки, нужен *.mind файл
 
-From Votkinsk with love :)
+From Udmurtia with love :)
